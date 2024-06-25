@@ -7,6 +7,10 @@
 |
 */
 
-import './routes/auth.route.js'
-import './routes/product.route.js'
 
+import ProductsController from '#controllers/products_controller'
+import router from '@adonisjs/core/services/router'
+
+router.group(() => {
+    router.get('/all', [ProductsController, 'getAllProducts'])
+}).prefix('/products')
