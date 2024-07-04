@@ -5,7 +5,8 @@ import { orderValidator } from '#validators/order'
 import type { HttpContext } from '@adonisjs/core/http'
 
 export default class OrdersController {
-  public async createOrder({ response, request }: HttpContext) {
+  public async createOrder({ response, request, session }: HttpContext) {
+    const { userId } = session.get('payload')
     const data = await orderValidator.validate(request.body())
 
     const product = await Product.findBy('id', data.productId)
@@ -13,7 +14,7 @@ export default class OrdersController {
 
     const totalPrice = product.price * data.qt
 
-    const order = await Order.create({ ...data, totalPrice: totalPrice })
+    const order = await Order.create({ ...data, totalPrice: totalPrice, userId: userId })
 
     await order.save()
 

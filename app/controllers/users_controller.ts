@@ -44,4 +44,9 @@ export default class UsersController {
         return response.json({ status: 200, data: token });
     }
 
+
+    public async fetchSuppliers({  response }: HttpContext) {
+        const suppliers = await User.findBy('isSupplier', true);
+        return response.send({ status: 200, data: suppliers })
+    }
 }

@@ -13,5 +13,7 @@ import router from '@adonisjs/core/services/router'
 router.group(() => {
     router.post('/sign-up', [UsersController, 'signUp'])
     router.post('/login', [UsersController, 'login'])
+    router.get('/suppliers/fetch', [UsersController, 'fetchSuppliers'])
 
 }).prefix('/auth')
+
