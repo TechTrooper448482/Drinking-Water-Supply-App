@@ -14,5 +14,6 @@ import { middleware } from '#start/kernel'
 import router from '@adonisjs/core/services/router'
 
 router.group(() => {
-    router.get('/create', [OrdersController, 'createOrder'])
+    router.post('/create', [OrdersController, 'createOrder'])
+    router.get('/fetch', [OrdersController, 'fetchOrders'])
 }).prefix('/orders').middleware(middleware.auth())
